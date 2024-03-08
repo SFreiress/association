@@ -9,6 +9,7 @@
 #   end
 
 # User.destroy_all
+# User.destroy_all
 
 # User.create email: 'admin@admin.com', password: '111111'
 
