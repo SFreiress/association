@@ -52,3 +52,14 @@ puts "Seeding debts..."
   )
 end
 puts "Debts seeded successfully!"
+
+# Seed payments
+puts "Seeding payments..."
+500.times do
+  Payment.create!(
+    amount: Faker::Number.decimal(l_digits: 3, r_digits: 2),
+    description: Faker::Lorem.sentence,
+    person_id: Faker::Number.between(from: 1, to: 100) # Assuming there are 100 people seeded
+  )
+end
+puts "Payments seeded successfully!"
