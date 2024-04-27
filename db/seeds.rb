@@ -1,65 +1,48 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+puts "Destroying existing records..."
+User.destroy_all
+Person.destroy_all
+Debt.destroy_all
+Payment.destroy_all
 
-# User.destroy_all
-# User.destroy_all
+User.create email: 'marcos@admin.com', password: '123456'
 
-# User.create email: 'admin@admin.com', password: '111111'
-
-# puts "Usuário criado:"
-# puts "login admin@admin.com"
-# puts "111111"
-
-
-# db/seeds.rb
-
-require 'faker'
-
-# Seed users
-puts "Seeding users..."
-50.times do
+100.times do
   User.create!(
     email: Faker::Internet.email,
-    password: Faker::Internet.password(min_length: 8)
+    password: Faker::Internet.password(min_length: 6)
   )
+  puts "Usuario cadastrado com sucesso!"
 end
-puts "Users seeded successfully!"
 
-# Seed people
-puts "Seeding people..."
+
 100.times do
   Person.create!(
     name: Faker::Name.name,
-    age: Faker::Number.between(from: 18, to: 90)
+    phone_number: Faker::PhoneNumber.phone_number,
+    national_id: CPF.generate,
+    active: Faker::Boolean.boolean,
+    user: User.order('random()').first
   )
+  puts "Cliente cadastrado com sucesso!)"
 end
-puts "People seeded successfully!"
 
-# Seed debts
-puts "Seeding debts..."
-500.times do
+100.times do
+  person = Person.order("RANDOM()").first
   Debt.create!(
-    amount: Faker::Number.decimal(l_digits: 3, r_digits: 2),
-    description: Faker::Lorem.sentence,
-    person_id: Faker::Number.between(from: 1, to: 100) # Assuming there are 100 people seeded
+    person: person,
+    amount: Faker::Number.decimal(l_digits: 2),
+    observation: Faker::Lorem.sentence
   )
+  puts "Debito lançado com sucesso!"
 end
-puts "Debts seeded successfully!"
 
-# Seed payments
-puts "Seeding payments..."
-500.times do
+100.times do
+  person = Person.order("RANDOM()").first
   Payment.create!(
-    amount: Faker::Number.decimal(l_digits: 3, r_digits: 2),
-    description: Faker::Lorem.sentence,
-    person_id: Faker::Number.between(from: 1, to: 100) # Assuming there are 100 people seeded
+    person: person,
+    amount: Faker::Number.decimal(l_digits: 2),
+    paid_at: Faker::Date.backward(days: 365)
   )
+  puts "Pagamento realizado com sucesso!"
 end
-puts "Payments seeded successfully!"
+

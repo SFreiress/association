@@ -33,3 +33,4 @@ RailsPerformance.setup do |config|
   # config home button link
   config.home_link = '/'
 end if defined?(RailsPerformance)
+

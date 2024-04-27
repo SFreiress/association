@@ -1,9 +1,5 @@
 <%# TODO: refactor DRY %>
-<% if notice.present? %>
-  <div class="alert alert-success">
-    <%= notice %>
-  </div>
-<% end %>
+<%= display_notice %>
 
 <%= link_to "< Voltar", debts_path, class: 'btn btn-secondary btn-sm' %>
 
