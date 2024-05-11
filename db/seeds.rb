@@ -4,7 +4,7 @@ Person.destroy_all
 Debt.destroy_all
 Payment.destroy_all
 
-User.create email: 'marcos@admin.com', password: '123456'
+User.create email: 'admin@admin.com', password: '123456'
 
 100.times do
   User.create!(
