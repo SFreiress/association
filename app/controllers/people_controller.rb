@@ -29,6 +29,9 @@ class PeopleController < ApplicationController
 
   # GET /people/1 or /people/1.json
   def show
+      @person = Person.find(params[:id])
+      @changes = @person.changes.order(created_at: :desc) # Busca as alterações da pessoa
+    # ...
   end
 
   # GET /people/new

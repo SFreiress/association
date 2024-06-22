@@ -12,3 +12,11 @@
 <%= link_to 'Editar', edit_person_path(@person), class: "btn btn-primary mb-2" %>
 
 <%= button_to "Remover", @person, method: :delete, class: 'btn btn-danger' %>
+
+# Retorna a lista de todas alterações
+@person.audits
+
+# Desta lista, liste em uma tabela os attributes:
+audit.action # create / update
+audit.user.email # quem alterou
+audit.audited_changes # alterações feitas

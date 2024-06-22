@@ -11,6 +11,8 @@ class Person < ApplicationRecord
   scope :active, -> { where(active: true) }
   scope :with_positive_balance, -> { where('balance > 0') }
 
+  audited
+
   def self.active_people_count
     Rails.cache.fetch("active_people_count", expires_in: 1.hour) do
       active.count
@@ -71,4 +73,3 @@ private
       errors.add(:national_id, :invalid)
     end
   end
-
